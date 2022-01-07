@@ -1,4 +1,25 @@
 {
+  "name": "tech-blog",
+  "description": "## Table of Contents   * [User Story](#user-story)   * [Acceptance Criteria](#acceptance-criteria)   * [Technologies Used](#technologies-used)   * [Installation](#installation)   * [Questions](#questions)   * [License](#license)",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "seed": "npm run seed/seed.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jcastillo9/tech-blog.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jcastillo9/tech-blog/issues"
+  },
+  "homepage": "https://github.com/jcastillo9/tech-blog#readme",
   "dependencies": {
     "bcrypt": "^5.0.1",
     "connect-session-sequelize": "^7.1.2",

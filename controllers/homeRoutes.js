@@ -1,8 +1,8 @@
 const router = require('express').Router();
 const { Comment, Post, User } = require('../models');
-const { restore } = require('../models/User');
 const withAuth = require('../utils/auth');
 
+// get all posts and match/join with user data
 router.get('/', async (req, res) => {
     try {
         const postData = await Post.findAll({
@@ -12,8 +12,11 @@ router.get('/', async (req, res) => {
                 attributes: ['username'] }
             ]
         });
+
+        // serialize so template can read
         const posts = postData.map((posts) => posts.get({ plain: true }));
 
+        // pass serialized data and session flag into template
         res.render('homepage', {
             posts,
             logged_in: req.session.logged_in
@@ -22,7 +25,7 @@ router.get('/', async (req, res) => {
         res.status(500).json(err);
     }
 });
-
+// get posts by id and match/join with comment data
 router.get('/post/:id', async (req, res) => {
     try {
         const postData = await Post.findByPk(req.params.id, {
@@ -52,8 +55,10 @@ router.get('/post/:id', async (req, res) => {
     }
 });
 
+// get access to dashboard
 router.get('/dashboard', withAuth, async (req, res) => {
     try {
+        // find the user that is logged in with session id
         const userData = await User.findByPk(req.session.user_id, {
             attributes: { exclude: ['passowrd'] },
             include: [ { model: Post }],
@@ -70,6 +75,7 @@ router.get('/dashboard', withAuth, async (req, res) => {
     }
 });
 
+// if user is logged in redirect to dashboard, otherwise redirect to log in page
 router.get('/login', (req, res) => {
     if (req.session.logged_in) {
         res.redirect('./dashboard');

@@ -9,7 +9,7 @@ Comment.init({
         primaryKey: true,
         autoIncrement: true
     },
-    comment_content: {
+    content: {
         type: DataTypes.STRING,
         },
     user_id: {

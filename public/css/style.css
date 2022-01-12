@@ -6,7 +6,9 @@ HTML, body {
 
 header {
     display: flex;
-    background-color: rgb(29, 120, 161);
+    background-color: rgb(144, 146, 146);
+    margin-bottom: 20px;
+    padding: 10px;
 }
 
 h1 {
@@ -42,4 +44,14 @@ nav ul li a {
 
 a {
     text-decoration: none; 
+}
+
+.card {
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+}
+
+.card-header {
+    background-color: rgb(59, 62, 63);
 }

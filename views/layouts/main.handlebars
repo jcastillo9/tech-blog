@@ -14,12 +14,12 @@
            <nav>
                <ul>
                    <li><a class="homepage" href="/">Home</a></li>
+                     {{#if logged_in}}
                    <li><a class="dashboard" href="/dashboard">Dashboard</a></li>
-                   {{#if logged_in}}
                    <li><a class="logout" href="/logout">Logout</a></li>
                    {{else}}
                    <li><a class="login" href="/login">Login</a></li>
-                   {{/else}}
+                   {{/if}}
                </ul>
            </nav>
        </div>

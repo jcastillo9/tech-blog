@@ -38,3 +38,8 @@ nav ul li a {
     gap: 20px;
     float: right;
 }
+
+
+a {
+    text-decoration: none; 
+}

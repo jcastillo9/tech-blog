@@ -10,7 +10,7 @@
 <div class="text-center">
     <h4>Comments</h4>
     {{#each post.comments as |comment|}}
-    <p>{{comment.content}} - {{comment.user_id}}, {{format_date post.date_created}}</p>
+    <p>{{comment.content}} - {{comment.user.username}}, {{format_date comment.date_created}}</p>
 
     {{/each}}
 </div>

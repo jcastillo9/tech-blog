@@ -3,11 +3,11 @@
   "description": "## Table of Contents   * [User Story](#user-story)   * [Acceptance Criteria](#acceptance-criteria)   * [Technologies Used](#technologies-used)   * [Installation](#installation)   * [Questions](#questions)   * [License](#license)",
   "version": "1.0.0",
   "main": "index.js",
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
-    "seed": "node seed/seed.js"
+    "seed": "node seed/seed.js",
+    "dev": "nodemon server"
   },
   "repository": {
     "type": "git",
@@ -29,5 +29,8 @@
     "express-session": "^1.17.2",
     "mysql2": "^2.3.3",
     "sequelize": "^6.12.5"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
   }
 }

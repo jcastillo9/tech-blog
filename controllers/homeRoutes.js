@@ -66,6 +66,8 @@ router.get('/dashboard', withAuth, async (req, res) => {
 
         const user = userData.get({ plain: true });
 
+        console.log(user)
+        
         res.render('dashboard', {
             user,
             logged_in: true
@@ -78,7 +80,7 @@ router.get('/dashboard', withAuth, async (req, res) => {
 // if user is logged in redirect to dashboard, otherwise redirect to log in page
 router.get('/login', (req, res) => {
     if (req.session.logged_in) {
-        res.redirect('./dashboard');
+        res.redirect('/dashboard');
         return;
     }
     res.render('login');

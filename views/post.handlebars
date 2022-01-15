@@ -12,7 +12,8 @@
     <h4 class="card-header text-white">Comments</h4>
     <div class="card-body">
         {{#each comments as |comment|}}
-        <p>{{content}} - {{user.username}} {{format_date date_created}}</p>
+        <p>{{content}}</p>
+        <small class="text-muted"> created by {{user.username}} on {{format_date date_created}}</small>
 
         {{/each}}
     </div>

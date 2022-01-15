@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const { Comment, Post, User } = require('../models');
-const withAuth = require('../utils/auth');
+const isAuth = require('../utils/auth');
 
 // get all posts and match/join with user data
 router.get('/', async (req, res) => {
@@ -14,7 +14,7 @@ router.get('/', async (req, res) => {
         });
 
         // serialize so template can read
-        const posts = postData.map((posts) => posts.get({ plain: true }));
+        const posts = postData.map(post => post.get({ plain: true }));
 
         // pass serialized data and session flag into template
         res.render('homepage', {
@@ -31,23 +31,24 @@ router.get('/post/:id', async (req, res) => {
         const postData = await Post.findByPk(req.params.id, {
             include: [ 
                 {
+                    model: User,
+                    attributes: ['username'],
+                  },
+                  {
                     model: Comment,
-                    include: [
-                        { 
-                            model: User
-                        },
-                    ]
-                },
-                {
-                    model: User
-                }
-            ]
-        });
+                    attributes: ['content', 'date_created'],
+                    include: {
+                      model: User,
+                      attributes: ['username'],
+                    },
+                  },
+                ]
+              });
 
-        const posts = postData.get({ plain: true });
+        const post = postData.get({ plain: true });
 
         res.render('post', {
-            posts,
+            ...post,
             logged_in: req.session.logged_in
         });
     } catch (err) {
@@ -56,20 +57,21 @@ router.get('/post/:id', async (req, res) => {
 });
 
 // get access to dashboard
-router.get('/dashboard', withAuth, async (req, res) => {
+router.get('/dashboard', isAuth, async (req, res) => {
     try {
         // find the user that is logged in with session id
         const userData = await User.findByPk(req.session.user_id, {
             attributes: { exclude: ['passowrd'] },
-            include: [ { model: Post }],
+            include: { 
+                model: Post,
+                attributes: ['id', 'title', 'content'] 
+             },
         });
 
         const user = userData.get({ plain: true });
-
-        console.log(user)
         
         res.render('dashboard', {
-            user,
+            ...user,
             logged_in: true
         });
     } catch (err) {
@@ -79,11 +81,24 @@ router.get('/dashboard', withAuth, async (req, res) => {
 
 // if user is logged in redirect to dashboard, otherwise redirect to log in page
 router.get('/login', (req, res) => {
+    try {
+        if (req.session.logged_in) {
+            res.redirect('/dashboard');
+            return;
+        }
+        res.render('login');
+    } catch (err) {
+        res.status(400).json(err)
+    }
+})
+
+router.get('/signup', (req, res) => {
     if (req.session.logged_in) {
         res.redirect('/dashboard');
         return;
     }
-    res.render('login');
-});
+
+    res.render('signup');
+}); 
 
 module.exports = router;

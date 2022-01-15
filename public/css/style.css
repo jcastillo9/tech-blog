@@ -57,7 +57,10 @@ a {
 }
 
 .forms {
-    display: flex; 
+    width: 40%;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
 } 
 
 

@@ -1,0 +1,44 @@
+<div class=" center">
+Hello!
+  {{#each comments as |comment| }}
+<div class="row mb-4 project">
+  <div class="col-md-5">
+    <h2>
+      <a href="/post/{{comment.id}}">{{comment.id}}</a>
+    </h2>
+    <p>Created by {{comment.user.username}} on {{format_date comment.date_created}}</p>
+  </div>
+  <div class="col-md-7">
+    <p>
+      {{comment.content}}
+    </p>
+  </div>
+</div>
+{{/each}}
+</div>
+
+ {{#if comments.length}}
+ <div class="row">
+    <h3>comments:</h3>
+    </div>
+
+    {{#each comments as |comment|}}
+    <div class="row mb-4 project">
+  <div class="col-md-5">
+    <h2>
+      <a href="/post/{{comment.id}}">{{comment.id}}</a>
+    </h2>
+    <p>Created by {{comment.user.username}} on {{format_date comment.date_created}}</p>
+  </div>
+  <div class="col-md-7">
+    <p>
+      {{comment.content}}
+    </p>
+  </div>
+</div>
+    {{/each}}
+  </div>
+  {{/if}}
+</div>
+
+  <script src="./js/comment.js"></script>

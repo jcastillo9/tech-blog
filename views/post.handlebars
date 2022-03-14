@@ -1,39 +1,39 @@
 <div class="card">
     <h4 class="card-header text-white">
-        {{title}}
-    </h4>
-    <div class="card-body">
-        <p class="card-text">{{content}}</p>
-        <small class="text-muted"> created by {{user.username}} on {{format_date date_created}}</small>
-    </div>
-</div>
-
-<div class="card ml-5">
+  {{title}}</h4>
+  <div class="card-body">
+  <p class="card-text">{{content}}</p>
+  <small class="text-muted">created by {{user.username}} on {{format_date date_created}}</small>
+  </div>
+{{#if comments.length}}
+  <div class="card ml-5">
     <h4 class="card-header text-white">Comments</h4>
     <div class="card-body">
-        {{#each comments as |comment|}}
-        <p>{{content}}</p>
-        <small class="text-muted"> created by {{user.username}} on {{format_date date_created}}</small>
-
-        {{/each}}
+    {{#each comments as |comment|}}
+      <p class="card-text">{{content}}</p>
+      <small class="text-muted">created by {{user.username}} on {{format_date date_created}}</small>
+      </div>
     </div>
-</div>
+    {{/each}}
+  </div>
+  {{/if}}
+
+
+
+
 {{#if logged_in}}
 <div class="card">
-    <h4 class="card-header bg-info"></h4>
-    <div class="card-body">
-        <form id="new-comment-form" post-id="{{post.id}}">
-            <div class="form-group">
+   <div class="card-body">
+<form id="new-comment-form">
+  <div>
+    <div class="form-group">
                 <label for="comment">New Comment</label>
                 <textarea class="form-control" id="comment" required></textarea>
             </div>
-
-            <button type="submit" class="btn btn-info">Submit</button>
+    <button type="submit" class="btn btn-info">Submit</button>
         </form>
     </div>
 </div>
 {{/if}}
 
-<script src="/js/post.js"></script>
-
-  <script src="../public/js/post.js"></script>
+<script src="./js/post.js"></script>
